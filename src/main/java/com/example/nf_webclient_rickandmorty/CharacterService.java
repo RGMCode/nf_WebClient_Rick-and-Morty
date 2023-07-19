@@ -1,37 +1,44 @@
 package com.example.nf_webclient_rickandmorty;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class CharacterService {
 
     private final WebClient webClient = WebClient.create("https://rickandmortyapi.com/api");
-    private ResponseEntity<CharacterRepo> responseEntity;
+    private ResponseEntity<CharacterResponse> responseEntity;
 
-    CharacterRepo getAllCharacter() {
-        responseEntity = webClient
-                .get()                          // get request auf die api uri
-                .uri("/character")          // uri endpunkt
-                .retrieve()                     // ausführen des request (send button im Postman)
-                .toEntity(CharacterRepo.class)      // Packt die Informationen aus der json in d
-                .block();                       // warten auf die anderen operationen
-
-        return Objects.requireNonNull(responseEntity).getBody();    //holt die Daten aus dem großen Object
+    public List<Character> getAllChar(){
+        WebClient webClient1 = WebClient.create("https://rickandmortyapi.com/api");
+        CharacterResponse response = webClient1
+                .get()
+                .uri("/character")
+                .retrieve()
+                .toEntity(CharacterResponse.class)
+                .block()
+                .getBody();
+        return response.getResults();
     }
 
-    CharacterRepo getCharacterAllAllive() {
-        responseEntity = webClient
-                .get()                                  // get request auf die api uri
-                .uri("/character/?status=alive")    // uri endpunkt      https://rickandmortyapi.com/api/character/?status=allive
-                .retrieve()                             // ausführen des request (send button im Postman)
-                .toEntity(CharacterRepo.class)              // Packt die Informationen aus der json in d
-                .block();                               // warten auf die anderen operationen
 
-        return Objects.requireNonNull(responseEntity).getBody();    //holt die Daten aus dem großen Object
+    public List<Character> getAllCharAlive(){
+        WebClient webClient1 = WebClient.create("https://rickandmortyapi.com/api");
+        CharacterResponse response = webClient1
+                .get()
+                .uri("/character/?status=alive")
+                .retrieve()
+                .toEntity(CharacterResponse.class)
+                .block()
+                .getBody();
+        return response.getResults();
     }
+
 
 }

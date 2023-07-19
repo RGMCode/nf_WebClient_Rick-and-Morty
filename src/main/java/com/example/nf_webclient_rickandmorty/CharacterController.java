@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -13,13 +15,13 @@ public class CharacterController {
     private final CharacterService characterService;
 
     @GetMapping("/all")
-    CharacterRepo getAllCharacters(){
-        return characterService.getAllCharacter();
+    List<Character> getAllChar(){
+        return characterService.getAllChar();
     }
 
     @GetMapping("/alive")
-    CharacterRepo getAllCharactersAlive(){
-        return characterService.getCharacterAllAllive();
+    List<Character> getAllCharAlive(){
+        return characterService.getAllCharAlive();
     }
 
 }

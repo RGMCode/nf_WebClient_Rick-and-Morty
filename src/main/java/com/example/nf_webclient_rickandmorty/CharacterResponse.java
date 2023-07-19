@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @RequiredArgsConstructor
 @Repository
-public class CharacterRepo {
-    private List<Character> result = new ArrayList<>();
+public class CharacterResponse {
+    private List<Character> results = new ArrayList<>();
 }
