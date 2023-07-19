@@ -3,9 +3,7 @@ package com.example.nf_webclient_rickandmorty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
 import java.util.List;
-
 
 @Service
 @RequiredArgsConstructor
